@@ -39,3 +39,22 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
+<%= component 'gifts/gift_list', type: params[:type] %>
+<%= cmp 'gifts/gift_list', type: params[:type] %>
+<%= cmp Gifts::GiftList, type: params[:type] %>
+<%= cmp :gift_list, type: params[:type] %>
+<%= gift_list_cmp type: params[:type] %>
+
+<%= element 'gifts/gift_list/gift_list', type: params[:type] %>
+<%= element Gifts::GiftList::GiftList, type: params[:type] %>
+<%= el Gifts::GiftList::GiftList, type: params[:type] %>
+<%= el Gifts::GiftList::GiftList, 'gifts/gift_list/gift_list', type: params[:type] %>
+
+
+# As Component
+/gifts
+  /gifts_list
+    component.rb
+    component.html.erb
+    component.scss
+    component.js

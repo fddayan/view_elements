@@ -13,14 +13,15 @@ module ViewElements
     end
 
     def render_sub_element(sub_item_element_name, locals)
-      # action_view.render file: template_path, locals: build_locals(locals), :formats=>[:html]
-      # prybug
       action_view.el sub_item_path_for(sub_item_element_name), locals
     end
 
     def render
-      # action_view.controller.append_view_path(File.dirname(template_path))
       action_view.render file: template_path, locals: build_locals(locals), formats: [:html]
+    end
+
+    def helper
+      @action_view
     end
 
     private

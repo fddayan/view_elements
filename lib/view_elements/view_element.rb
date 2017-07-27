@@ -1,6 +1,11 @@
+require 'view_elements/paths'
+require 'view_elements/rendering'
+
 module ViewElements
   class ViewElement
     include ViewElements::RailsSupport
+    include ViewElements::Rendering
+    include ViewElements::Paths
 
     attr_reader :action_view, :locals, :view_path
 
@@ -12,54 +17,41 @@ module ViewElements
       define_locals_accessors(locals) if locals.present?
     end
 
-    def render_sub_element(sub_item_element_name, locals)
-      action_view.el sub_item_path_for(sub_item_element_name), locals
-    end
-
-    def render
-      action_view.render file: template_path, locals: build_locals(locals), formats: [:html]
+    def build_locals(locals)
+      {}.tap do |new_locals|
+        new_locals.merge!(locals)
+        new_locals[:element] = self
+        new_locals[:e] = self
+        temp = self.expose_locals
+        new_locals.merge!(temp) if temp
+      end
     end
 
     def helper
       @action_view
     end
 
-    private
-
-    def sub_item_path_for(element_name)
-      element_dir_path.join(element_name).to_s
-    end
-
-    def element_path
-      # @element_name ||= Pathname.new(method(:render).source_location.first)
-      @element_path = Pathname.new(self.class.name.underscore)
-    end
-
-    def element_dir_path
-      @element_dir_path ||= element_path.dirname
-    end
-
-    def build_locals(l)
-      {}.tap do |new_locals|
-        new_locals.merge!(l)
-        new_locals[:element] = self
-        new_locals[:e] = self
-        temp = expose_locals
-        new_locals.merge!(temp) if temp
+    def expose_locals
+      {}.tap do |e|
+        exposes = self.class.exposes
+        if exposes
+          exposes.each do |name, block|
+            e[name] = instance_eval(&block)
+          end
+        end
       end
     end
 
-    def expose_locals
-      {}
+    def self.expose(name, &block)
+      @exposes ||= {}
+      @exposes[name] = block
     end
 
-    def view_path_for(path)
-      view_path.join(path)
+    def self.exposes
+      @exposes
     end
 
-    def template_path
-      view_path_for(self.class.to_s.underscore)
-    end
+    private
 
     def define_locals_accessors(locals)
       (class << self; self; end).class_eval do

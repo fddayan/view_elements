@@ -10,7 +10,7 @@ module ViewElements
     end
 
     def render
-      action_view.render file: template, locals: build_locals, format: :html
+      action_view.render file: template, locals: build_locals, formats: [:html]
     end
 
     def build_locals

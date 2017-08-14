@@ -8,9 +8,9 @@ module ViewElements
       validate_properties!
       if self.class.template_proc
         type, proc = self.class.template_proc
-        action_view.render inline: proc.call, type: type, locals: build_locals(locals)
+        action_view.render inline: proc.call, type: type, locals: build_locals(locals), format: :html
       elsif self.class.template_file_name.present?
-        action_view.render file: view_path_for(self.class.template_file_name), locals: build_locals(locals)
+        action_view.render file: view_path_for(self.class.template_file_name), locals: build_locals(locals), format: :html
       else
         super
       end

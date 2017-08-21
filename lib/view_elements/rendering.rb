@@ -1,6 +1,6 @@
 module ViewElements::Rendering
   def render_sub_element(sub_item_element_name, locals)
-    action_view.el sub_item_path_for(sub_item_element_name), locals
+    action_view.el sub_item_path_for(sub_item_element_name.to_s), locals
   end
 
   def render_view_element(name, args = {})

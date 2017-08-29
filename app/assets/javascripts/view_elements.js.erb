@@ -1,0 +1,19 @@
+<% if Dir.exist?(ViewElements.configuration.components_path) %>
+  <% depend_on ViewElements.configuration.components_path.to_s %>
+  <% #Dir.glob(ViewElements.configuration.components_path.join('**/**')).each do |component_dir| %>
+  <% ViewElements.configuration.component_relative_dirs.each do |component| %>
+    <%
+        begin
+          require_asset "#{component}/component"
+        rescue Sprockets::FileNotFound
+          Rails.logger.debug("ViewElements: javascript not found for component '#{component}'")
+    %>
+
+/* ViewElements: stylesheet not found for component '<%= component %>' */
+  <%
+    end
+  end
+  %>
+<% else %>
+  <% depend_on Rails.root.join('app').to_s %>
+<% end %>

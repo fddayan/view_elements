@@ -5,6 +5,10 @@ module ViewElements::Helper
     ViewElements::Locator.build(self, name, locals).render
   end
 
+  def cmp(name, locals = {})
+    ViewElements::Components::Renderer.new(self.controller.view_context, name, locals).render
+  end
+
   def jquery_render(selector, view_name, locals = {})
     <<-JAVASCRIPT
     $('#{selector}')

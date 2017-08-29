@@ -6,6 +6,7 @@ require 'view_elements/renderer'
 require 'view_elements/template_finder'
 require 'view_elements/view_element'
 require 'view_elements/component'
+require 'view_elements/components/renderer'
 require 'view_elements/railtie'
 
 module ViewElements
@@ -30,5 +31,30 @@ module ViewElements
 
   def self.helper_names
     ViewElements::Registry.components_map.keys
+  end
+
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
+
+  class Configuration
+    attr_accessor :components_path
+
+    def initialize
+      @components_path = Rails.root.join('app','view_elements')
+    end
+
+    def component_relative_dirs
+      components_dirs.map { |dir| Pathname.new(dir).relative_path_from(components_path) }
+    end
+
+    def components_dirs
+      Dir.glob(components_path.join('**/**'))
+      .select { |dir| File.directory?(dir) }
+    end
+
+    def components_path=(path)
+     @components_path = Pathname.new(path)
+    end
   end
 end

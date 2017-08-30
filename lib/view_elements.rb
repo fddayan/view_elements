@@ -7,7 +7,7 @@ require 'view_elements/template_finder'
 require 'view_elements/view_element'
 require 'view_elements/component'
 require 'view_elements/components/renderer'
-require 'view_elements/stylesheets'
+# require 'view_elements/stylesheets'
 require 'view_elements/railtie'
 
 module ViewElements

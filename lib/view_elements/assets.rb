@@ -1,6 +1,6 @@
 module ViewElements
   module Assets
-    def self.files
+    def self.css_files
       components_path = ViewElements.configuration.components_path
       Dir.glob(components_path.join('**/style**'))
       .select { |dir| File.file?(dir) }

@@ -1,5 +1,5 @@
 module ViewElements
-  class Sass
+  class Stylesheets
     def self.files
       components_path = ViewElements.configuration.components_path
       Dir.glob(components_path.join('**/style**'))

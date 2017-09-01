@@ -1,4 +1,4 @@
-require 'view_elements/helper'
+require 'view_elements/components/helper'
 
 module ViewElements
   class Railtie < ::Rails::Engine

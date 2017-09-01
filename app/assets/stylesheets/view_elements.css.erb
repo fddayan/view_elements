@@ -4,6 +4,13 @@
     <%
         begin
           require_asset "#{component}/style"
+    %>
+
+    <% if Rails.env.development? %>
+    /* ViewElements: requiring '<%= component %>' */
+    <% end %>
+
+    <%
         rescue Sprockets::FileNotFound
           Rails.logger.debug("ViewElements: stylesheet not found for component '#{component}'")
     %>

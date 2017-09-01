@@ -5,6 +5,14 @@
     <%
         begin
           require_asset "#{component}/component"
+    %>
+
+    <% if Rails.env.development? %>
+    /* ViewElements: requiring '<%= component %>' */
+    <% end %>
+
+    <%
+          Rails.logger.debug("ViewElements: require javascript '#{component}'")
         rescue Sprockets::FileNotFound
           Rails.logger.debug("ViewElements: javascript not found for component '#{component}'")
     %>

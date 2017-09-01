@@ -8,9 +8,6 @@ module ViewElements
     initializer "view_elements.assets" do |app|
       Rails.application.config.assets.paths <<
        ViewElements.configuration.components_path
-
-       #  Rails.application.config.assets.precompile += %w( mountain_view/styleguide.css
-                                                      #  mountain_view/styleguide.js )
    end
   end
 end

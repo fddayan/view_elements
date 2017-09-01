@@ -2,7 +2,6 @@
 
 module ViewElements::Components
   class Renderer
-    # include ViewElements::Components::Template
     attr_reader :action_view, :components_path, :name, :locals
 
     def initialize(action_view, name, locals)
@@ -19,7 +18,8 @@ module ViewElements::Components
     def presenter
       presenter_class.constantize.new(action_view, locals)
     rescue NameError => e
-      raise ComponentNotFound.new("Component #{presenter_class} not found in #{components_path}")
+      raise e
+      # raise ComponentNotFound.new("Component #{presenter_class} not found in #{components_path}")
     end
 
     def presenter_class

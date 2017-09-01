@@ -1,10 +1,10 @@
 require "view_elements/version"
 require 'view_elements/rails_support'
 require 'view_elements/assets'
-require 'view_elements/locator'
-require 'view_elements/registry'
+# require 'view_elements/locator'
+# require 'view_elements/registry'
 require 'view_elements/renderer'
-require 'view_elements/template_finder'
+# require 'view_elements/template_finder'
 require 'view_elements/view_element'
 require 'view_elements/component'
 require 'view_elements/components/renderer'

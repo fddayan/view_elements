@@ -4,17 +4,17 @@ module ViewElements
   class Component < ViewElement
     # cattr_accessor :components_registry
 
-    def render
-      validate_properties!
-      if self.class.template_proc
-        type, proc = self.class.template_proc
-        action_view.render inline: proc.call, type: type, locals: build_locals(locals), format: :html
-      elsif self.class.template_file_name.present?
-        action_view.render file: view_path_for(self.class.template_file_name), locals: build_locals(locals), format: :html
-      else
-        super
-      end
-    end
+    # def render
+    #   validate_properties!
+    #   if self.class.template_proc
+    #     type, proc = self.class.template_proc
+    #     action_view.render inline: proc.call, type: type, locals: build_locals(locals), format: :html
+    #   elsif self.class.template_file_name.present?
+    #     action_view.render file: view_path_for(self.class.template_file_name), locals: build_locals(locals), format: :html
+    #   else
+    #     super
+    #   end
+    # end
 
     def validate_properties!
       return unless self.class.properties_list.present?

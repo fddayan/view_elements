@@ -21,5 +21,9 @@ module ViewElements
       validate_properties!
       define_locals_accessors!
     end
+
+    def helper
+      action_view
+    end
   end
 end

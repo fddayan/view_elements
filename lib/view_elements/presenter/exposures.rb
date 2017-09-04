@@ -12,7 +12,7 @@ module ViewElements
             exposes = self.class.exposes
             if exposes
               exposes.each do |name, block|
-                e[name] = instance_eval(&block)
+                e[name] = instance_eval(&block) unless e[name].present?
               end
             end
           end

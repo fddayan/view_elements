@@ -12,14 +12,14 @@ module ViewElements::Components
     end
 
     def render
-      ViewElements::Renderer.new(action_view, template_path, presenter).render
+      ViewElements::Renderer.new(action_view, template_path, build_locals).render
     end
 
     def presenter
       presenter_class.constantize.new(action_view, locals)
     rescue NameError => e
-      raise e
-      # raise ComponentNotFound.new("Component #{presenter_class} not found in #{components_path}")
+      # raise e
+      raise ComponentNotFound.new("Cannot load #{presenter_class}: #{e.message}")
     end
 
     def presenter_class
@@ -36,6 +36,25 @@ module ViewElements::Components
 
     def component_path
       components_path.join(name.to_s)
+    end
+
+    def include_partial(name, partial_locals = {})
+      ViewElements::Renderer.new(action_view, component_path.join("_#{name}"), build_locals.merge(partial_locals)).render
+    end
+
+    private
+
+    def build_locals
+      {}.tap do |new_locals|
+        new_locals.merge!(presenter.locals)
+        new_locals[:component] = self
+        new_locals[:element] = presenter
+        new_locals[:e] = presenter
+        new_locals[:presenter] = presenter
+        new_locals[:p] = presenter
+        temp = presenter.expose_locals
+        new_locals.merge!(temp) if temp
+      end
     end
   end
 

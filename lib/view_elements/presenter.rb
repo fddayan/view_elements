@@ -12,11 +12,12 @@ module ViewElements
     extend ViewElements::Presenter::Lets
     include ViewElements::Presenter::RailsSupport
 
-    attr_reader :action_view, :locals
+    attr_reader :action_view, :locals, :component
 
-    def initialize(action_view, locals = {})
+    def initialize(action_view, locals = {}, component)
       @locals = locals
       @action_view = action_view
+      @component = component
 
       validate_properties!
       define_locals_accessors!
@@ -24,6 +25,18 @@ module ViewElements
 
     def helper
       action_view
+    end
+
+    def wrapper_tag
+      :div
+    end
+
+    def wrapper_css_class
+      @css_selector ||= component.name.split('/').join('--')
+    end
+
+    def wrapper(&block)
+      action_view.content_tag(wrapper_tag, action_view.capture(&block), class: wrapper_css_class)
     end
   end
 end

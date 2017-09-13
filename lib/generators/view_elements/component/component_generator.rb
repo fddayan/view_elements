@@ -2,18 +2,30 @@ class ViewElements::ComponentGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
 
   def generate_class
-    template 'component_class.rb', "app/view_elements/#{file_path}.rb"
+    template 'presenter.rb', "app/view_elements/#{file_path}/presenter.rb"
   end
 
   def generate_view
-    template 'component_view.html.erb', "app/view_elements/#{file_path}.html.erb"
+    template 'index.html.erb', "app/view_elements/#{file_path}/index.html.erb"
   end
 
   def generate_js
-    template 'component.js', "app/view_elements/#{file_path}.js"
+    template 'component.js', "app/view_elements/#{file_path}/component.js"
   end
 
   def generate_scss
-    template 'component.scss', "app/view_elements/#{file_path}.scss"
+    template 'style.scss', "app/view_elements/#{file_path}/style.scss"
+  end
+
+  def css_class
+    file_path.split('/').join('--')
+  end
+
+  def view_wrapper
+    <<-HEREDOC
+<%= presenter.wrapper do %>
+
+<% end %>
+    HEREDOC
   end
 end

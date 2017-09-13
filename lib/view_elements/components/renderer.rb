@@ -16,14 +16,14 @@ module ViewElements::Components
     end
 
     def presenter
-      presenter_class.constantize.new(action_view, locals)
+      presenter_class.constantize.new(action_view, locals, self)
     rescue NameError => e
       # raise e
       raise ComponentNotFound.new("Cannot load #{presenter_class}: #{e.message}")
     end
 
     def presenter_class
-      @presenter_class ||= "#{name.to_s.classify}::Presenter"
+      @presenter_class ||= "#{name.to_s}/presenter".classify
     end
 
     def presenter_path
@@ -40,6 +40,11 @@ module ViewElements::Components
 
     def include_partial(name, partial_locals = {})
       ViewElements::Renderer.new(action_view, component_path.join("_#{name}"), build_locals.merge(partial_locals)).render
+    end
+
+    def cmp(cmp_name, cmp_locals)
+      sub_cmp_name = "#{name}/#{cmp_name}"
+      self.class.new(action_view, sub_cmp_name,  cmp_locals).render
     end
 
     private

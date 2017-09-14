@@ -50,13 +50,13 @@ It will create this structure
         style.scss        
 ```
 
-In your existing view `app/views/cart/index.html.erb`
+**In your existing view `app/views/cart/index.html.erb`**
 
 ```erb
 <%= cmp 'shopping_cart/items_list', items: @items %>
 ```
 
-Inside folder `app/view_elements/shopping_cart/items_list`
+**Inside folder `app/view_elements/shopping_cart/items_list`**
 
 index.html.erb
 
@@ -65,7 +65,7 @@ index.html.erb
   <ul class='item-list'>
     <% items.each do |item| %>
       <li class='item'><%= componet.cmp 'item', item: item %></li>
-      <!--component.cmp looks for component in the current component directory -->
+      <!--component.cmp looks for components in the current component directory -->
     <% end %>
   </ul>
 ```
@@ -102,7 +102,7 @@ style.scss
 }
 ```
 
-Inside folder `app/view_elements/shopping_cart/items_list/item`
+**Inside folder `app/view_elements/shopping_cart/items_list/item`**
 
 index.html.erb
 

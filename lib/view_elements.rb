@@ -3,7 +3,7 @@ require 'view_elements/assets'
 require 'view_elements/renderer'
 # require 'view_elements/view_element'
 # require 'view_elements/component'
-require 'view_elements/components/renderer'
+require 'view_elements/component'
 require 'view_elements/presenter'
 require 'view_elements/railtie'
 

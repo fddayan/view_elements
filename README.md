@@ -20,9 +20,9 @@ Or install it yourself as:
 
 ## Intro
 
-The whole purpose of this project is trying to fix the partial madness. That is onne view folder having dozen of partials and then other views for different controllers reusing partials from other views in a not so good predictable way.
+The whole purpose of this project is trying to fix the partial madness. That is, one view folder having dozen of partials and then other views from different controllers reusing partials from other views in a not so good predictable way.
 
-The idea is that each `partial` now becomes a `component` and stylesheet, JavaScript, presenter and view goes into the same folder named as the partial.
+The idea is that each `partial` now becomes a `component` and stylesheet, Javascript, presenter and view goes into the same folder named as the partial.
 
 Also, component can have nested components, so it can be structured in a predictable way and the layout itself can be used for documenting how the partial works.
 

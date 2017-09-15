@@ -143,7 +143,7 @@ style.scss
 
 **Assets**
 
-You have to add the following to your assets in order to have component.js and style.scss available.
+You have to add the following to your `application.js.erb` and `application.scss.erb` in order to have `component.js` and `style.scss` available. Both need to end with the `.erb` extension. 
 
 application.scss.erb
 
@@ -157,7 +157,7 @@ application.js.erb
 
 ```erb
 <% ViewElements::Assets.js_files.each do |f| %>
-  @import '<%=f %>';
+  <%= require_asset f %>
 <% end %>
 ```
 

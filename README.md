@@ -1,6 +1,6 @@
 # ViewElements
 
-View partials structured as components inspired by all JavaScript frameworks out there (Angular2, MarkoJs, VueJs, React).
+View partials structured as components inspired by all JavaScript frameworks out there (Angular2, Marko.js, Vue.js, React).
 
 ## Installation
 
@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Intro
 
-The whole purpose of this project is trying to fix the partial madness. That is, one view folder having dozen of partials and then other views from different controllers reusing partials from other views in a not so good predictable way.
+The whole purpose of this project is trying to fix the partial and helper madness. That is, one view folder having dozen of partials, other views from different controllers using partials from other views in a not so good predictable way, and helper methods as global methods everywhere.
+
+Also, each component can take care of loading the data/models that needs, removing the need for the controller to load the models. I never liked the controller loading models. I started noticing that every time I wanted to reuse a partial, I had to make sure I loaded the data it needs on the controller and that was creating a lot of duplication. I know it breaks the MVC paradigm, but I find it much easier loading that in the component.
 
 The idea is that each `partial` now becomes a `component` and stylesheet, Javascript, presenter and view goes into the same folder named as the partial.
 
@@ -143,7 +145,7 @@ style.scss
 
 **Assets**
 
-You have to add the following to your `application.js.erb` and `application.scss.erb` in order to have `component.js` and `style.scss` available. Both need to end with the `.erb` extension. 
+You have to add the following to your `application.js.erb` and `application.scss.erb` in order to have `component.js` and `style.scss` available. Both need to end with the `.erb` extension.
 
 application.scss.erb
 

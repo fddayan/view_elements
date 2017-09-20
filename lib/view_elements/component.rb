@@ -54,7 +54,7 @@ module ViewElements
         new_locals[:element] = presenter
         new_locals[:e] = presenter
         new_locals[:presenter] = presenter
-        new_locals[:p] = presenter
+        new_locals[:pr] = presenter
         temp = presenter.expose_locals
         new_locals.merge!(temp) if temp
       end

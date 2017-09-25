@@ -6,6 +6,7 @@ require 'view_elements/renderer'
 require 'view_elements/component'
 require 'view_elements/presenter'
 require 'view_elements/railtie'
+require 'view_elements/configuration'
 
 module ViewElements
   # def self.components_map
@@ -41,24 +42,7 @@ module ViewElements
     @configuration ||= Configuration.new
   end
 
-  class Configuration
-    attr_accessor :components_path
-
-    def initialize
-      @components_path = Rails.root.join('app','view_elements')
-    end
-
-    def component_relative_dirs
-      components_dirs.map { |dir| Pathname.new(dir).relative_path_from(components_path) }
-    end
-
-    def components_dirs
-      Dir.glob(components_path.join('**/**'))
-      .select { |dir| File.directory?(dir) }
-    end
-
-    def components_path=(path)
-     @components_path = Pathname.new(path)
-    end
+  def self.configure
+    yield(configuration)
   end
 end

@@ -21,11 +21,21 @@ module ViewElements
           return unless self.class.properties_list.present?
 
           missing_properties = _calc_missing_properties(locals)
-
           raise "Missing #{missing_properties.to_sentence} propertie(s) for #{self.class} component." if missing_properties.present?
+
+          if ViewElements.configuration.strict_properties
+            not_properties = _calc_not_properties(locals)
+            raise "Unknown propertie(s) #{not_properties.to_sentence} for #{self.class} component." if not_properties.present?
+          end
         end
 
         private
+
+        def _calc_not_properties(locals)
+          if locals.present?
+            locals.keys.map(&:to_s) - self.class.properties_list.map(&:to_s)
+          end
+        end
 
         def _calc_missing_properties(locals)
           if locals.present?

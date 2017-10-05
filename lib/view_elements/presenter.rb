@@ -10,7 +10,7 @@ module ViewElements
     include ViewElements::Presenter::Exposures
     include ViewElements::Presenter::Locals
     extend ViewElements::Presenter::Lets
-    include ViewElements::Presenter::RailsSupport
+    # include ViewElements::Presenter::RailsSupport
 
     attr_reader :action_view, :locals, :component
 
@@ -21,6 +21,10 @@ module ViewElements
 
       validate_properties!
       define_locals_accessors!
+    end
+
+    def h
+      action_view
     end
 
     def helper

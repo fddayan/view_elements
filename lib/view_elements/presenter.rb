@@ -35,8 +35,31 @@ module ViewElements
       :div
     end
 
+    def css
+      wrapper_css_class
+    end
+
+    def jquery_selector
+      @jquery_selector ||= begin
+        s = ".#{component_css_class}"
+        s << ".#{distinct_id_css_class}" if distinct_id
+        s
+      end
+    end
+
     def wrapper_css_class
-      @css_selector ||= component.name.split('/').join('--')
+      @css_selector ||= "#{component_css_class} #{distinct_id_css_class}"
+    end
+
+    def distinct_id_css_class
+      "distid-#{distinct_id}" if distinct_id.present?
+    end
+
+    def component_css_class
+      component.name.split('/').join('--')
+    end
+
+    def distinct_id
     end
 
     def wrapper(&block)

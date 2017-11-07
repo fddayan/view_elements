@@ -9,14 +9,25 @@ module ViewElements
       @components_path = ViewElements.configuration.components_path
     end
 
+    def layout
+      ViewElements.configuration.layout
+    end
+
     def render
+      if layout.present?
+        presenter.wrapper { _render }
+      else
+        _render
+      end
+    end
+
+    def _render
       ViewElements::Renderer.new(action_view, template_path, build_locals).render
     end
 
     def presenter
-      presenter_class.constantize.new(action_view, locals, self)
+      @presenter ||= presenter_class.constantize.new(action_view, locals, self)
     rescue NameError => e
-      # raise e
       raise ComponentNotFound.new("Cannot load #{presenter_class}: #{e.message}")
     end
 

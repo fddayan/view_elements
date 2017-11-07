@@ -1,10 +1,11 @@
 module ViewElements
   class Configuration
-    attr_accessor :components_path, :strict_properties
+    attr_accessor :components_path, :strict_properties, :layout
 
     def initialize
       @components_path = Rails.root.join('app','view_elements')
       @strict_properties = false
+      @layout = true
     end
 
     def component_relative_dirs

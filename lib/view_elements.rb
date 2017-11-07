@@ -45,4 +45,8 @@ module ViewElements
   def self.configure
     yield(configuration)
   end
+
+  # def sefl.presenter(name)
+  #   Define.new(name).define
+  # end
 end

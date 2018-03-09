@@ -14,7 +14,7 @@ module ViewElements
     end
 
     def render
-      if layout.present?
+      if layout.present? && presenter.default_wrap?
         presenter.wrapper { _render }
       else
         _render

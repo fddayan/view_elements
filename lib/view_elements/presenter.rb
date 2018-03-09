@@ -62,6 +62,10 @@ module ViewElements
     def distinct_id
     end
 
+    def default_wrap?
+      true
+    end
+
     def wrapper(&block)
       action_view.content_tag(wrapper_tag, action_view.capture(&block), class: "view_elements_wrapper #{wrapper_css_class}")
     end

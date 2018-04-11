@@ -14,6 +14,7 @@ module ViewElements
     end
 
     def render
+      presenter.before_render if presenter.respond_to?(:before_render)
       if layout.present? && presenter.default_wrap?
         presenter.wrapper { _render }
       else
